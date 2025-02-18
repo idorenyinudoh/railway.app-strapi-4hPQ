@@ -6,17 +6,12 @@ export default ({ env }) => ({
     },
     upload: {
         config: {
-            provider: 'cloudinary',
+            provider: '@strapi-community/strapi-provider-upload-google-cloud-storage',
             providerOptions: {
-                cloud_name: env('CLOUDINARY_NAME'),
-                api_key: env('CLOUDINARY_KEY'),
-                api_secret: env('CLOUDINARY_SECRET'),
+              bucketName: env('GCS_BUCKET_NAME'),
+              basePath: env('GCS_BASE_PATH'),
+              generateUploadFileName: (file) => `media/${file.name}`,
             },
-            actionOptions: {
-                upload: {},
-                uploadStream: {},
-                delete: {},
-            },
-        },
+          },
     },
 });
